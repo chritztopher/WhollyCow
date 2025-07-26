@@ -9,14 +9,14 @@ const VariantPill = ({ variant, isActive, onClick }) => {
       hover: 'hover:border-wc-purple'
     },
     thieves: {
-      border: 'border-orange-400',
-      background: 'bg-orange-400',
-      hover: 'hover:border-orange-400'
+      border: 'border-orange-300',
+      background: 'bg-orange-300',
+      hover: 'hover:border-orange-300'
     },
     unscented: {
-      border: 'border-gray-400',
-      background: 'bg-gray-400',
-      hover: 'hover:border-gray-400'
+      border: 'border-blue-300',
+      background: 'bg-blue-300',
+      hover: 'hover:border-blue-300'
     }
   };
 

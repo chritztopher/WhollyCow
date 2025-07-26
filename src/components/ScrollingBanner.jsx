@@ -14,13 +14,11 @@ const ScrollingBanner = ({ textArray }) => {
         <span className="text-sm font-mono font-medium text-gray-700 tracking-wider whitespace-nowrap">
           {text}
         </span>
-        {index < textArray.length - 1 && (
-          <img 
-            src={everscrollImages[index % everscrollImages.length]} 
-            alt="separator" 
-            className="w-4 h-4 flex-shrink-0"
-          />
-        )}
+        <img 
+          src={everscrollImages[index % everscrollImages.length]} 
+          alt="separator" 
+          className="w-4 h-4 flex-shrink-0"
+        />
       </li>
     ));
   };

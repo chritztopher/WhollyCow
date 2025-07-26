@@ -4,23 +4,58 @@ import VariantPill from './VariantPill';
 import QuantityStepper from './QuantityStepper';
 import Badge from './Badge';
 
-const ProductCard = () => {
-  const [selectedVariant, setSelectedVariant] = useState('lavender');
+const ProductCard = ({ onAddToCart }) => {
+  const [selectedVariant, setSelectedVariant] = useState('unscented');
   const [quantity, setQuantity] = useState(1);
-  const [heroImage, setHeroImage] = useState('/assets/Product1.png');
+  const [heroImage, setHeroImage] = useState('/assets/Unscented.png');
 
   const variants = ['lavender', 'thieves', 'unscented'];
   const thumbnails = [
-    '/assets/Product1.png',
+    '/assets/Unscented.png',
     '/assets/product2.png', 
     '/assets/product3.png',
     '/assets/product4.png',
     '/assets/product5.png'
   ];
 
+  // Variant to image mapping
+  const variantImages = {
+    lavender: '/assets/product4.png',
+    thieves: '/assets/product5.png',
+    unscented: '/assets/Unscented.png'
+  };
+
+  // Variant to button color mapping
+  const variantButtonColors = {
+    lavender: 'bg-gradient-to-r from-wc-purple to-purple-400',
+    thieves: 'bg-gradient-to-r from-orange-300 to-orange-400',
+    unscented: 'bg-gradient-to-r from-blue-300 to-blue-400'
+  };
+
+  // Variant to description mapping
+  const variantDescriptions = {
+    lavender: 'Grass fed tallow blended with lavender oil calms the senses and leaves skin soft and smooth.',
+    thieves: 'Grass fed tallow enriched with clove, cinnamon, and citrus oils provides deep moisture with a gentle spiced aroma.',
+    unscented: 'Pure grass fed tallow delivers full-strength nourishment with no added fragrance for the most sensitive skin.'
+  };
+
+  const handleVariantChange = (variant) => {
+    setSelectedVariant(variant);
+    setHeroImage(variantImages[variant]);
+  };
+
   const handleAddToCart = () => {
-    // Future: cart.add({ variant: selectedVariant, quantity })
-    console.log(`Added ${quantity} ${selectedVariant} to cart`);
+    const cartItem = {
+      name: 'Tallow Butter',
+      variant: selectedVariant,
+      quantity: quantity,
+      price: 40,
+      image: variantImages[selectedVariant]
+    };
+    onAddToCart(cartItem);
+    
+    // Reset quantity after adding to cart
+    setQuantity(1);
   };
 
   const handleThumbnailClick = (imageSrc) => {
@@ -123,22 +158,22 @@ const ProductCard = () => {
             </div>
           </div>
 
-         {/* Product Description */}
-         <p className="text-sm leading-relaxed text-gray-700 font-mono">
-           Made from grass-fed beef tallow, this single-ingredient moisturizer nourishes deeply, leaving your skin soft, smooth, and radiant.
-         </p>
+                   {/* Product Description */}
+          <p className="text-sm leading-relaxed text-gray-700 font-mono">
+            {variantDescriptions[selectedVariant]}
+          </p>
 
-         {/* Variant Pills */}
-         <div className="flex gap-2 flex-wrap">
-           {variants.map((variant) => (
-             <VariantPill
-               key={variant}
-               variant={variant}
-               isActive={selectedVariant === variant}
-               onClick={setSelectedVariant}
-             />
-           ))}
-         </div>
+                   {/* Variant Pills */}
+          <div className="flex gap-2 flex-wrap">
+            {variants.map((variant) => (
+              <VariantPill
+                key={variant}
+                variant={variant}
+                isActive={selectedVariant === variant}
+                onClick={handleVariantChange}
+              />
+            ))}
+          </div>
 
          {/* Features List */}
          <ul className="space-y-3 text-sm">
@@ -168,13 +203,13 @@ const ProductCard = () => {
            </div>
          </div>
 
-                 {/* Add to Cart Button */}
-         <button
-           onClick={handleAddToCart}
-           className="w-full bg-gradient-to-r from-wc-purple to-purple-400 text-white text-lg font-medium py-4 rounded-xl border-2 border-black shadow-md hover:scale-[1.02] transition-transform focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-wc-purple"
-         >
-           ADD TO CART | ${quantity * 40}
-         </button>
+                                   {/* Add to Cart Button */}
+          <button
+            onClick={handleAddToCart}
+            className={`w-full ${variantButtonColors[selectedVariant]} text-white text-lg font-medium py-4 rounded-xl border-2 border-black shadow-md hover:scale-[1.02] transition-transform focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-wc-purple`}
+          >
+            ADD TO CART | ${quantity * 40}
+          </button>
 
          <p className="text-sm text-gray-500 text-center">
            ships in 1-2 days • free shipping on orders $50+
