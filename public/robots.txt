@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://whollycowtallow.com/sitemap.xml
+
+# Block crawling of admin areas if they exist
+Disallow: /admin/
+Disallow: /.well-known/
+
+# Allow all images to be crawled
+Allow: /assets/
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1 

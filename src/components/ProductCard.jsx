@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import VariantPill from './VariantPill';
 import QuantityStepper from './QuantityStepper';
 import Badge from './Badge';
+import OptimizedImage from './OptimizedImage';
 
 const ProductCard = ({ onAddToCart }) => {
   const [selectedVariant, setSelectedVariant] = useState('unscented');
@@ -91,44 +92,50 @@ const ProductCard = ({ onAddToCart }) => {
          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 8px 16px -8px rgba(0, 0, 0, 0.3)'
        }}
      >
-             {/* NEW! Doodle */}
-       <img 
-         src="/assets/New.png" 
-         alt="New!" 
-         className="absolute -top-1 md:-top-2 right-3 md:right-6 w-12 md:w-20 z-20"
-       />
+                           {/* NEW! Doodle */}
+        <OptimizedImage 
+          src="/assets/New.png" 
+          alt="New product badge" 
+          className="absolute -top-1 md:-top-2 right-3 md:right-6 w-12 md:w-20 z-20"
+          priority={false}
+          placeholder={false}
+        />
 
-       {/* Mobile: Full Width Image Section */}
-       <div className="relative w-full md:w-1/2 flex-shrink-0">
-         <img
-           src={heroImage}
-           alt="Wholly Cow lavender tallow jar on clouds"
-           className="aspect-[1/1] w-full rounded-[8px] md:rounded-[12px] object-cover border-2 border-black"
-         />
+               {/* Mobile: Full Width Image Section */}
+        <div className="relative w-full md:w-1/2 flex-shrink-0">
+          <OptimizedImage
+            src={heroImage}
+            alt="Wholly Cow tallow butter jar - natural skincare"
+            className="aspect-[1/1] w-full rounded-[8px] md:rounded-[12px] object-cover border-2 border-black"
+            priority={true}
+          />
          
-         {/* Purple Sparkle Overlay */}
-         <img 
-           src="/assets/Sparkle.png" 
-           alt="Sparkle" 
-           className="absolute -top-2 -left-2 md:-top-6 md:-left-6 w-12 md:w-20"
-         />
+                   {/* Purple Sparkle Overlay */}
+          <OptimizedImage 
+            src="/assets/Sparkle.png" 
+            alt="Decorative sparkle element" 
+            className="absolute -top-2 -left-2 md:-top-6 md:-left-6 w-12 md:w-20"
+            priority={false}
+            placeholder={false}
+          />
 
-                   {/* Thumbnail Strip - 5 equal squares */}
-          <div className="flex gap-2 mt-4 w-full">
-            {thumbnails.map((thumb, index) => (
-             <button
-               key={index}
-               onClick={() => handleThumbnailClick(thumb)}
-               className="flex-1 aspect-square rounded-lg overflow-hidden border border-black hover:border-wc-purple focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-wc-purple"
-             >
-               <img
-                 src={thumb}
-                 alt={`Product thumbnail ${index + 1}`}
-                 className="w-full h-full object-cover"
-               />
-             </button>
-           ))}
-         </div>
+                                       {/* Thumbnail Strip - 5 equal squares */}
+           <div className="flex gap-2 mt-4 w-full">
+             {thumbnails.map((thumb, index) => (
+              <button
+                key={index}
+                onClick={() => handleThumbnailClick(thumb)}
+                className="flex-1 aspect-square rounded-lg overflow-hidden border border-black hover:border-wc-purple focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-wc-purple"
+              >
+                <OptimizedImage
+                  src={thumb}
+                  alt={`Tallow butter product view ${index + 1} - natural moisturizer`}
+                  className="w-full h-full object-cover"
+                  priority={false}
+                />
+              </button>
+            ))}
+          </div>
        </div>
 
        {/* Mobile: Stacked Content Below Image */}
@@ -187,21 +194,21 @@ const ProductCard = ({ onAddToCart }) => {
            </li>
          </ul>
 
-         {/* Badges */}
-         <div className="flex gap-2 flex-wrap">
-           <div className="inline-flex items-center gap-2 bg-white text-wc-green text-sm font-medium px-3 py-2 rounded-full font-mono">
-             <img src="/assets/Natural.png" alt="Natural" className="h-6" />
-             Organic
-           </div>
-           <div className="inline-flex items-center gap-2 bg-white text-wc-green text-sm font-medium px-3 py-2 rounded-full font-mono">
-             <img src="/assets/Natural.png" alt="Natural" className="h-6" />
-             Grassfed
-           </div>
-           <div className="inline-flex items-center gap-2 bg-white text-wc-green text-sm font-medium px-3 py-2 rounded-full font-mono">
-             <img src="/assets/Natural.png" alt="Natural" className="h-6" />
-             Handmade
-           </div>
-         </div>
+                   {/* Badges */}
+          <div className="flex gap-2 flex-wrap">
+            <div className="inline-flex items-center gap-2 bg-white text-wc-green text-sm font-medium px-3 py-2 rounded-full font-mono">
+              <OptimizedImage src="/assets/Natural.png" alt="Organic certification icon" className="h-6" priority={false} placeholder={false} />
+              Organic
+            </div>
+            <div className="inline-flex items-center gap-2 bg-white text-wc-green text-sm font-medium px-3 py-2 rounded-full font-mono">
+              <OptimizedImage src="/assets/Natural.png" alt="Grass-fed certification icon" className="h-6" priority={false} placeholder={false} />
+              Grassfed
+            </div>
+            <div className="inline-flex items-center gap-2 bg-white text-wc-green text-sm font-medium px-3 py-2 rounded-full font-mono">
+              <OptimizedImage src="/assets/Natural.png" alt="Handmade certification icon" className="h-6" priority={false} placeholder={false} />
+              Handmade
+            </div>
+          </div>
 
                                    {/* Add to Cart Button */}
           <button

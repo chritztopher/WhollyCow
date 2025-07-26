@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductCard from '../components/ProductCard';
+import OptimizedImage from '../components/OptimizedImage';
 
 const Home = ({ onAddToCart }) => {
   return (
@@ -36,7 +37,7 @@ const Home = ({ onAddToCart }) => {
         {/* Right - Company Info */}
         <div className="flex items-center gap-2 md:gap-3 text-white font-mono text-sm md:text-lg">
           <span>whollycowtallow 2025</span>
-          <img src="/assets/Smiley.png" alt="Smiley" className="w-4 h-4 md:w-6 md:h-6" />
+          <OptimizedImage src="/assets/Smiley.png" alt="Happy face emoji" className="w-4 h-4 md:w-6 md:h-6" priority={false} placeholder={false} />
         </div>
       </footer>
     </main>

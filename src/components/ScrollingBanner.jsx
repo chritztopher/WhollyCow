@@ -1,4 +1,5 @@
 import React from 'react';
+import OptimizedImage from './OptimizedImage';
 
 const ScrollingBanner = ({ textArray }) => {
   const everscrollImages = [
@@ -14,10 +15,12 @@ const ScrollingBanner = ({ textArray }) => {
         <span className="text-sm font-mono font-medium text-gray-700 tracking-wider whitespace-nowrap">
           {text}
         </span>
-        <img 
+        <OptimizedImage 
           src={everscrollImages[index % everscrollImages.length]} 
-          alt="separator" 
+          alt="Decorative separator icon" 
           className="w-4 h-4 flex-shrink-0"
+          priority={false}
+          placeholder={false}
         />
       </li>
     ));
