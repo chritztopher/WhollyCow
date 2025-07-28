@@ -8,7 +8,7 @@ const Header = ({ cartItemCount = 0, onCartClick }) => {
     'handmade',
     'silky smooth',
     'deeply nourishing',
-    'single ingredient',
+    'Made with care',
     'zero waste',
     'ancestral skincare'
   ];
@@ -24,9 +24,9 @@ const Header = ({ cartItemCount = 0, onCartClick }) => {
         <div className="flex-shrink-0">
           <a href="/" className="block">
             <OptimizedImage 
-              src="/assets/Patchy.png" 
+              src="/assets/Nav_Logo_Cow-01.webp" 
               alt="Wholly Cow - Premium Grass-Fed Tallow Skincare Logo" 
-              className="h-12 w-auto"
+              className="h-16 w-auto"
               priority={true}
               placeholder={false}
             />

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { createCheckout } from '../services/shopifyService';
 
 const CartDrawer = ({ isOpen, onClose, cartItems, onUpdateQuantity }) => {
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+
   const variantColors = {
     lavender: {
       bg: 'bg-wc-purple',
@@ -27,6 +30,46 @@ const CartDrawer = ({ isOpen, onClose, cartItems, onUpdateQuantity }) => {
       const newQuantity = item.quantity + change;
       onUpdateQuantity(itemId, newQuantity);
     }
+  };
+
+  const handleCheckout = async () => {
+    if (cartItems.length === 0 || isCheckingOut) return;
+    
+    setIsCheckingOut(true);
+    
+    // Skip the API entirely - use direct cart URL
+    const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    
+    // Try different URL formats - Shopify has multiple ways to add to cart
+    const urlOptions = [
+      // Format 1: Direct product ID with quantity
+      `https://jame3r-0v.myshopify.com/cart/7839558697041:${totalQuantity}`,
+      
+      // Format 2: Add to cart then go to cart
+      `https://jame3r-0v.myshopify.com/cart/add?id=7839558697041&quantity=${totalQuantity}&return_to=/cart`,
+      
+      // Format 3: Direct to checkout with product
+      `https://jame3r-0v.myshopify.com/cart/add?id=7839558697041&quantity=${totalQuantity}&return_to=/checkout`,
+      
+      // Format 4: Just go to the product page
+      `https://jame3r-0v.myshopify.com/products/tallow-butter`,
+      
+      // Format 5: Go to cart page
+      `https://jame3r-0v.myshopify.com/cart`
+    ];
+    
+    // Start with the first option
+    const primaryUrl = urlOptions[0];
+    console.log('🛒 Redirecting to cart:', primaryUrl);
+    console.log('💡 If this doesn\'t work, try these URLs manually:');
+    urlOptions.forEach((url, index) => {
+      console.log(`${index + 1}. ${url}`);
+    });
+    
+    // Give user feedback, then redirect
+    setTimeout(() => {
+      window.location.href = primaryUrl;
+    }, 500);
   };
 
   return (
@@ -150,8 +193,26 @@ const CartDrawer = ({ isOpen, onClose, cartItems, onUpdateQuantity }) => {
                   </span>
                 </div>
                 
-                <button className="w-full bg-gradient-to-r from-wc-purple to-purple-400 text-white text-lg font-medium py-3 rounded-xl border-2 border-black shadow-md hover:scale-[1.02] transition-transform focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-wc-purple">
-                  CHECKOUT
+                <button 
+                  onClick={handleCheckout}
+                  disabled={isCheckingOut}
+                  className={`w-full text-white text-lg font-medium py-3 rounded-xl border-2 border-black shadow-md transition-all focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-wc-purple ${
+                    isCheckingOut 
+                      ? 'bg-gray-400 cursor-not-allowed' 
+                      : 'bg-gradient-to-r from-wc-purple to-purple-400 hover:scale-[1.02]'
+                  }`}
+                >
+                  {isCheckingOut ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Creating checkout...
+                    </div>
+                  ) : (
+                    'CHECKOUT'
+                  )}
                 </button>
                 
                 <p className="text-xs text-gray-500 text-center mt-2">

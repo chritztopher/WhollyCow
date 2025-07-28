@@ -166,7 +166,7 @@ const ProductCard = ({ onAddToCart }) => {
           </div>
 
                    {/* Product Description */}
-          <p className="text-sm leading-relaxed text-gray-700 font-mono">
+          <p className="text-sm leading-relaxed text-gray-700">
             {variantDescriptions[selectedVariant]}
           </p>
 
@@ -196,15 +196,15 @@ const ProductCard = ({ onAddToCart }) => {
 
                    {/* Badges */}
           <div className="flex gap-2 flex-wrap">
-            <div className="inline-flex items-center gap-2 bg-white text-wc-green text-sm font-medium px-3 py-2 rounded-full font-mono">
+            <div className="inline-flex items-center gap-2 bg-white text-wc-green text-sm font-semibold px-3 py-2 rounded-full">
               <OptimizedImage src="/assets/Natural.png" alt="Organic certification icon" className="h-6" priority={false} placeholder={false} />
               Organic
             </div>
-            <div className="inline-flex items-center gap-2 bg-white text-wc-green text-sm font-medium px-3 py-2 rounded-full font-mono">
+            <div className="inline-flex items-center gap-2 bg-white text-wc-green text-sm font-semibold px-3 py-2 rounded-full">
               <OptimizedImage src="/assets/Natural.png" alt="Grass-fed certification icon" className="h-6" priority={false} placeholder={false} />
               Grassfed
             </div>
-            <div className="inline-flex items-center gap-2 bg-white text-wc-green text-sm font-medium px-3 py-2 rounded-full font-mono">
+            <div className="inline-flex items-center gap-2 bg-white text-wc-green text-sm font-semibold px-3 py-2 rounded-full">
               <OptimizedImage src="/assets/Natural.png" alt="Handmade certification icon" className="h-6" priority={false} placeholder={false} />
               Handmade
             </div>
