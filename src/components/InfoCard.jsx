@@ -14,7 +14,7 @@ const InfoCard = () => {
       }}
     >
       {/* Heading */}
-      <h3 className="font-serif text-2xl md:text-3xl mb-4 text-center text-gray-900">
+      <h3 className="font-semibold font-serif text-3xl md:text-4xl lg:text-4xl mb-4 text-center text-gray-900">
         Why You'll Love It
       </h3>
       <hr className="border-gray-300 mb-6" />

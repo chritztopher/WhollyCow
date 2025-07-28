@@ -40,7 +40,7 @@ const Header = ({ cartItemCount = 0, onCartClick }) => {
             className="relative p-2 text-gray-700 hover:text-wc-purple transition-colors focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-wc-purple"
             aria-label={`View cart (${cartItemCount} items)`}
           >
-            <OptimizedImage src="/assets/Cart.png" alt="Shopping Cart" className="h-6" priority={true} placeholder={false} />
+            <OptimizedImage src="/assets/Cart.png" alt="Shopping Cart" className="h-8" priority={true} placeholder={false} />
             {cartItemCount > 0 && (
               <span className="absolute -top-1 -right-1 bg-wc-purple text-white text-xs font-bold min-w-[1.25rem] h-5 rounded-full flex items-center justify-center px-1">
                 {cartItemCount > 9 ? '9+' : cartItemCount}

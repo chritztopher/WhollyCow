@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { createCheckout } from '../services/shopifyService';
+import { createCheckout, createSimpleCheckoutUrl } from '../services/shopifyService';
 
 const CartDrawer = ({ isOpen, onClose, cartItems, onUpdateQuantity }) => {
   const [isCheckingOut, setIsCheckingOut] = useState(false);
@@ -24,6 +24,10 @@ const CartDrawer = ({ isOpen, onClose, cartItems, onUpdateQuantity }) => {
     return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
   };
 
+  const removeItem = (itemId) => {
+    onUpdateQuantity(itemId, 0); // Setting quantity to 0 removes the item
+  };
+
   const updateQuantity = (itemId, change) => {
     const item = cartItems.find(item => item.id === itemId);
     if (item) {
@@ -37,39 +41,31 @@ const CartDrawer = ({ isOpen, onClose, cartItems, onUpdateQuantity }) => {
     
     setIsCheckingOut(true);
     
-    // Skip the API entirely - use direct cart URL
-    const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-    
-    // Try different URL formats - Shopify has multiple ways to add to cart
-    const urlOptions = [
-      // Format 1: Direct product ID with quantity
-      `https://jame3r-0v.myshopify.com/cart/7839558697041:${totalQuantity}`,
+    try {
+      console.log('🛒 Starting checkout process...');
       
-      // Format 2: Add to cart then go to cart
-      `https://jame3r-0v.myshopify.com/cart/add?id=7839558697041&quantity=${totalQuantity}&return_to=/cart`,
+      // Use the new Shopify checkout functionality
+      const result = await createCheckout(cartItems);
       
-      // Format 3: Direct to checkout with product
-      `https://jame3r-0v.myshopify.com/cart/add?id=7839558697041&quantity=${totalQuantity}&return_to=/checkout`,
+      if (result.success) {
+        console.log('✅ Checkout successful!');
+        // The popup is already opened by createCheckout function
+        // Optionally clear cart on successful checkout
+        // You can add cart clearing logic here if needed
+      } else {
+        throw new Error(result.error);
+      }
       
-      // Format 4: Just go to the product page
-      `https://jame3r-0v.myshopify.com/products/tallow-butter`,
+    } catch (error) {
+      console.error('❌ Checkout failed:', error);
       
-      // Format 5: Go to cart page
-      `https://jame3r-0v.myshopify.com/cart`
-    ];
-    
-    // Start with the first option
-    const primaryUrl = urlOptions[0];
-    console.log('🛒 Redirecting to cart:', primaryUrl);
-    console.log('💡 If this doesn\'t work, try these URLs manually:');
-    urlOptions.forEach((url, index) => {
-      console.log(`${index + 1}. ${url}`);
-    });
-    
-    // Give user feedback, then redirect
-    setTimeout(() => {
-      window.location.href = primaryUrl;
-    }, 500);
+      // Fallback to simple cart URL
+      console.log('🔄 Using fallback checkout method...');
+      const fallbackUrl = createSimpleCheckoutUrl(cartItems);
+      window.open(fallbackUrl, '_blank');
+    } finally {
+      setIsCheckingOut(false);
+    }
   };
 
   return (
@@ -123,7 +119,18 @@ const CartDrawer = ({ isOpen, onClose, cartItems, onUpdateQuantity }) => {
                     const colors = variantColors[item.variant] || variantColors.unscented;
                     
                     return (
-                      <div key={item.id} className="bg-gray-50 rounded-lg p-4">
+                      <div key={item.id} className="bg-gray-50 rounded-lg p-4 relative">
+                        {/* Trash Icon - Top Right */}
+                        <button
+                          onClick={() => removeItem(item.id)}
+                          className="absolute top-2 right-2 p-1 hover:bg-gray-200 rounded-full transition-colors group"
+                          aria-label={`Remove ${item.name} from cart`}
+                        >
+                          <svg className="w-4 h-4 text-gray-400 group-hover:text-red-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </button>
+
                         {/* Product Info */}
                         <div className="flex items-start gap-3 mb-3">
                           <img
@@ -131,7 +138,7 @@ const CartDrawer = ({ isOpen, onClose, cartItems, onUpdateQuantity }) => {
                             alt={item.name}
                             className="w-16 h-16 rounded-lg object-cover border border-gray-200"
                           />
-                          <div className="flex-1">
+                          <div className="flex-1 pr-6">
                             <h3 className="font-semibold text-gray-900">{item.name}</h3>
                             <p className="text-sm text-gray-600">${item.price} each</p>
                             
