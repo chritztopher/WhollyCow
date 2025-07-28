@@ -105,7 +105,7 @@ const InfoCard = () => {
       {/* Product Details Footer */}
       <div className="mt-6 pt-4 border-t border-gray-200">
         <p className="text-xs text-gray-500 leading-relaxed text-center">
-          <strong>Net Wt. 8 oz glass jar.</strong><br />
+          <strong>Net Wt. 4 oz glass jar.</strong><br />
           Made in small batches, always free of fillers, preservatives and synthetic fragrances.
         </p>
       </div>

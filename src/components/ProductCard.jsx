@@ -50,7 +50,7 @@ const ProductCard = ({ onAddToCart }) => {
       name: 'Tallow Butter',
       variant: selectedVariant,
       quantity: quantity,
-      price: 40,
+      price: 25,
       image: variantImages[selectedVariant]
     };
     onAddToCart(cartItem);
@@ -190,7 +190,7 @@ const ProductCard = ({ onAddToCart }) => {
            </li>
            <li className="flex items-center gap-3">
              <CalendarIcon className="w-5 h-5 text-blue-600 flex-shrink-0" />
-             <span>8oz = 1-2 months of daily use</span>
+             <span>4oz = 1-2 months of daily use</span>
            </li>
          </ul>
 
@@ -215,7 +215,7 @@ const ProductCard = ({ onAddToCart }) => {
             onClick={handleAddToCart}
             className={`w-full ${variantButtonColors[selectedVariant]} text-white text-lg font-medium py-4 rounded-xl border-2 border-black shadow-md hover:scale-[1.02] transition-transform focus-visible:outline-dashed focus-visible:outline-2 focus-visible:outline-wc-purple`}
           >
-            ADD TO CART | ${quantity * 40}
+            ADD TO CART | ${quantity * 25}
           </button>
 
          <p className="text-sm text-gray-500 text-center">
