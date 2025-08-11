@@ -10,7 +10,7 @@ const Home = ({ onAddToCart }) => {
       <div 
         className="fixed top-0 left-0 bg-cover bg-center bg-no-repeat -z-10"
         style={{ 
-          backgroundImage: 'url(/assets/Hero_Image.png)',
+          backgroundImage: 'url(/assets/Hero_Image.jpg)',
           height: '100vh',
           width: '100vw',
         }}

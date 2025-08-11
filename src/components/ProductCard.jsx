@@ -8,22 +8,22 @@ import OptimizedImage from './OptimizedImage';
 const ProductCard = ({ onAddToCart }) => {
   const [selectedVariant, setSelectedVariant] = useState('unscented');
   const [quantity, setQuantity] = useState(1);
-  const [heroImage, setHeroImage] = useState('/assets/Unscented.png');
+  const [heroImage, setHeroImage] = useState('/assets/Unscented.jpg');
 
   const variants = ['lavender', 'thieves', 'unscented'];
   const thumbnails = [
-    '/assets/Unscented.png',
-    '/assets/product2.png', 
-    '/assets/product3.png',
-    '/assets/product4.png',
-    '/assets/product5.png'
+    '/assets/Unscented.jpg',
+    '/assets/product2.jpg', 
+    '/assets/product3.jpg',
+    '/assets/product4.jpg',
+    '/assets/product5.jpg'
   ];
 
   // Variant to image mapping
   const variantImages = {
-    lavender: '/assets/product4.png',
-    thieves: '/assets/product5.png',
-    unscented: '/assets/Unscented.png'
+    lavender: '/assets/product4.jpg',
+    thieves: '/assets/product5.jpg',
+    unscented: '/assets/Unscented.jpg'
   };
 
   // Variant to button color mapping
