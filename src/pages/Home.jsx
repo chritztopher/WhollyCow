@@ -18,14 +18,14 @@ const Home = ({ onAddToCart }) => {
       </div>
 
       {/* Static Product Card */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen pt-8 md:pt-0 pb-8 px-2">
-        <div className="md:-mt-16">
+      <div className="relative z-10 flex items-center justify-center min-h-screen pt-20 md:pt-24 lg:pt-16 pb-8 px-2">
+        <div className="md:-mt-8 lg:-mt-12">
           <ProductCard onAddToCart={onAddToCart} />
         </div>
       </div>
 
       {/* Info Card - directly below Product Card */}
-      <div className="relative z-10 px-2 pb-8 -mt-2 md:-mt-4 lg:-mt-16">
+      <div className="relative z-10 px-2 pb-8 -mt-2 md:-mt-8 lg:-mt-16">
         <InfoCard />
       </div>
 

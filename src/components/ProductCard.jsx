@@ -87,7 +87,7 @@ const ProductCard = ({ onAddToCart }) => {
        initial={{ y: 20, opacity: 0 }}
        animate={{ y: 0, opacity: 1 }}
        transition={{ duration: 0.5 }}
-       className="bg-white rounded-[20px] md:rounded-[28px] p-4 md:p-8 flex flex-col md:flex-row gap-4 md:gap-6 w-[95vw] md:w-[75vw] lg:w-[65vw] mx-auto relative"
+       className="bg-white rounded-[20px] md:rounded-[28px] p-4 md:p-6 lg:p-8 flex flex-col md:flex-row gap-4 md:gap-6 lg:gap-8 w-[95vw] md:w-[85vw] lg:w-[75vw] xl:w-[65vw] mx-auto relative"
        style={{
          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 8px 16px -8px rgba(0, 0, 0, 0.3)'
        }}
@@ -101,8 +101,8 @@ const ProductCard = ({ onAddToCart }) => {
           placeholder={false}
         />
 
-               {/* Mobile: Full Width Image Section */}
-        <div className="relative w-full md:w-1/2 flex-shrink-0">
+               {/* Image Section - Responsive proportions */}
+        <div className="relative w-full md:w-[45%] lg:w-2/5 flex-shrink-0">
           <OptimizedImage
             src={heroImage}
             alt="Wholly Cow tallow butter jar - natural skincare"
@@ -138,8 +138,8 @@ const ProductCard = ({ onAddToCart }) => {
           </div>
        </div>
 
-       {/* Mobile: Stacked Content Below Image */}
-       <div className="flex flex-col gap-4 md:gap-5 flex-1 md:pl-4">
+       {/* Content Section - Responsive proportions */}
+       <div className="flex flex-col gap-4 md:gap-4 lg:gap-5 flex-1 md:pl-4 lg:pl-6">
          {/* Star Rating */}
          <div className="flex items-center gap-2">
            <div className="flex gap-1">
@@ -152,9 +152,9 @@ const ProductCard = ({ onAddToCart }) => {
            <span className="text-sm text-gray-600 font-medium">4.9 • 128 reviews</span>
          </div>
 
-                   {/* Product Title with Quantity - Mobile & Desktop */}
+                   {/* Product Title with Quantity - Responsive */}
           <div className="flex items-center justify-between">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold font-serif">
+            <h2 className="text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold font-serif">
               Tallow Butter
             </h2>
             <div className="flex-shrink-0">
@@ -171,7 +171,7 @@ const ProductCard = ({ onAddToCart }) => {
           </p>
 
                    {/* Variant Pills */}
-          <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2 md:gap-3 flex-wrap">
             {variants.map((variant) => (
               <VariantPill
                 key={variant}

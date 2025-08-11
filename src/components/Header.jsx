@@ -14,9 +14,9 @@ const Header = ({ cartItemCount = 0, onCartClick }) => {
   ];
 
   return (
-    <header className="relative bg-transparent">
+    <header className="relative bg-transparent z-20">
       {/* Top row - Logo and Cart */}
-      <div className="flex items-center justify-between px-4 md:px-6 h-20">
+      <div className="flex items-center justify-between px-4 md:px-6 lg:px-8 h-16 md:h-20">
         {/* Empty space for balance */}
         <div className="w-10"></div>
         
@@ -51,7 +51,7 @@ const Header = ({ cartItemCount = 0, onCartClick }) => {
       </div>
 
       {/* Bottom row - Full-width Scrolling Banner */}
-      <div className="w-full bg-white border-t border-b border-black py-2">
+      <div className="w-full bg-white border-t border-b border-black py-2 md:py-3">
         <ScrollingBanner textArray={bannerTexts} />
       </div>
     </header>
